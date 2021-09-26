@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>LISTADO DE PLANETAS</title>
+</head>
+<body 
+	 style="background-color:LightYellow;
+	 font-family:monospace;
+	 color:DarkOliveGreen;
+	 text-align:center;">
+	<h5>
+		Login: 
+			<span 
+				th:text="${usuario.nombre}">
+			</span> 
+		- Password: 
+			<span
+				th:text="${usuario.password}">
+			</span>
+	</h5>
+
+	<h1>LISTADO DE PLANETAS</h1>
+	<table style="width:100%"; border=1>
+		<thead>
+			<tr>
+				<th>Id
+				<th>Nombre
+				<th>Masa
+				<th>Radio
+				<th>Radio orbital
+				<th>Gravedad
+				<th>Periodo de rotacion
+				<th>Periodo orbital
+				<th>Borrar
+				<th>Modificar
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${planetas.empty}">
+				<td colspan="2">No hay planetas disponibles</td>
+			</tr>
+			<tr th:each="planeta : ${planetas}">
+				<td><span th:text="${planeta.id}"></span></td>
+				<td><span th:text="${planeta.nombre}"></span></td>
+				<td><span th:text="${planeta.masa}"></span></td>
+				<td><span th:text="${planeta.radio}"></span></td>
+				<td><span th:text="${planeta.orbitradio}"></span></td>
+				<td><span th:text="${planeta.gravedad}"></span></td>
+				<td><span th:text="${planeta.rotacion}"></span></td>
+				<td><span th:text="${planeta.orbita}"></span></td>
+				<td><a th:href="@{/borrado/}+${planeta.id}">Borrar</a></td>
+				<td><a th:href="@{/modificar/}+${planeta.id}">Modificar</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<form style="text-align: left; display:flex; flex-direction: column; align-items: center"
+		th:action="${action}" 
+		th:object="${planeta}" 
+		method="post">
+	<br>
+		ID (autom&aacutetico):
+		<br>          
+			<input 
+				type=text 
+				th:field="*{id}"     
+				value="*{id}" read>
+			<br>
+		PLANETA: 
+			<input 
+				type=text 
+				th:field="*{nombre}" 
+				value="*{nombre}">
+			<br>		
+		MASA: 
+			<input 
+				type=text 
+				th:field="*{masa}" 
+				value="*{masa}">
+			<br>
+		RADIO: 
+			<input 
+				type=text 
+				th:field="*{radio}" 
+				value="*{radio}">
+			<br>
+		RADIO ORBITAL: 
+			<input 
+				type=text 
+				th:field="*{orbitradio}" 
+				value="*{orbitradio}">
+			<br>		
+		GRAVEDAD: 
+			<input 
+				type=text 
+				th:field="*{gravedad}" 
+				value="*{gravedad}">
+			<br>
+		PERIODO DE ROTACION: 
+			<input 
+				type=text 
+				th:field="*{rotacion}" 
+				value="*{rotacion}">
+			<br>
+		PERIODO ORBITAL: 
+			<input 
+				type=text 
+				th:field="*{orbita}" 
+				value="*{orbita }">
+			<br>
+		
+		<br><input type=submit name=submit th:value="${boton}">
+		<br>
+	</form>
+	<footer style="color:Teal;text-align:center;">
+		<ul>
+			<hr style="border:30px;"><hr style="color:Teal;">
+			<br>Lara Saiz Moya - IT Academy - Septiembre 2021
+		</ul>
+	</footer>
+</body>
+</html>
